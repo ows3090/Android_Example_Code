@@ -7,7 +7,7 @@ import ows.kotlinstudy.calculatorwithmvp.databinding.ActivityMainBinding
 import ows.kotlinstudy.mvcexample.model.db.ResultDatabase
 import ows.kotlinstudy.mvcexample.model.db.entity.ResultEntity
 
-class MainActivity : AppCompatActivity(), MainContract.View {
+class MainActivity : AppCompatActivity(), MainContract.View<MainPresenter> {
 
     private lateinit var binding: ActivityMainBinding
 

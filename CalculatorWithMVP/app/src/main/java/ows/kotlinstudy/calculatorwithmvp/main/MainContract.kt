@@ -7,7 +7,7 @@ import ows.kotlinstudy.mvcexample.model.db.entity.ResultEntity
 
 interface MainContract {
 
-    interface View: BaseView<Presenter>{
+    interface View<T> : BaseView<Presenter>{
         fun appendCurTextView(text: String)
         fun showCurTextView(text: String)
         fun showResultTextView(text: String)

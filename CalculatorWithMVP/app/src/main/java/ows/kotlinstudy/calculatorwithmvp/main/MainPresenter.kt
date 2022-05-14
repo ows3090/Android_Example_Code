@@ -1,12 +1,11 @@
 package ows.kotlinstudy.calculatorwithmvp.main
 
-import androidx.room.RoomDatabase
 import ows.kotlinstudy.mvcexample.model.db.ResultDatabase
 import ows.kotlinstudy.mvcexample.model.db.entity.ResultEntity
 import java.util.*
 
 class MainPresenter(
-    private val view: MainContract.View,
+    private val view: MainContract.View<MainPresenter>,
     private val db: ResultDatabase?
 ) : MainContract.Presenter {
     val numStack = Stack<Int>()
