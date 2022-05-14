@@ -3,8 +3,13 @@ package ows.kotlinstudy.mvcexample
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.RoomDatabase
 import ows.kotlinstudy.mvcexample.databinding.ActivityMainBinding
+import ows.kotlinstudy.mvcexample.model.NumModel
+import ows.kotlinstudy.mvcexample.model.db.ResultDatabase
+import ows.kotlinstudy.mvcexample.model.db.ResultDatabase.Companion.build
+import ows.kotlinstudy.mvcexample.model.db.entity.ResultEntity
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,12 +19,25 @@ class MainActivity : AppCompatActivity() {
     private val operationStack = Stack<Char>()
     private var curNum = ""
 
+    private val db by lazy { ResultDatabase.build(applicationContext) }
+    private val resultAdapter = ResultAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initViews()
         bindViews()
+    }
+
+    private fun initViews() = with(binding){
+        resultRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = resultAdapter
+        }
+
+       resultAdapter.submitList(db.resultDao().getResultList())
     }
 
     private fun bindViews() = with(binding) {
@@ -67,7 +85,7 @@ class MainActivity : AppCompatActivity() {
                 val num1 = numStack.pop()
                 val num2 = numStack.pop()
 
-                numStack.add(num1 / num2)
+                numStack.add(num2 / num1)
                 operationStack.pop()
             } else {
                 break
@@ -98,7 +116,7 @@ class MainActivity : AppCompatActivity() {
                 val num1 = numStack.pop()
                 val num2 = numStack.pop()
 
-                numStack.add(num1 / num2)
+                numStack.add(num2 / num1)
                 operationStack.pop()
             } else {
                 break
@@ -148,7 +166,7 @@ class MainActivity : AppCompatActivity() {
                 val num1 = numStack.pop()
                 val num2 = numStack.pop()
 
-                numStack.add(num1 / num2)
+                numStack.add(num2 / num1)
                 operationStack.pop()
             } else if (operationStack.peek() == '+') {
                 val num1 = numStack.pop()
@@ -165,6 +183,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.resultTextView.text = "${numStack.peek()}"
+
+        db.resultDao().insertResult(
+            ResultEntity(
+                "${binding.curTextView.text} ${numStack.peek()}"
+            )
+        )
     }
 
     companion object {
