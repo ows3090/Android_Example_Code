@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/actionPickButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACTION_PICK"/>
+
+    <Button
+        android:id="@+id/actionGetContentButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACTION_GET_CONTENT"/>
+
+    <Button
+        android:id="@+id/actionOpenDocumentButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACTION_OPEN_DOCUMENT"/>
+
+    <Button
+        android:id="@+id/actionOpenDocumentTreeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACTION_OPEN_DOCUMENT_TREE"/>
+
+</LinearLayout>
