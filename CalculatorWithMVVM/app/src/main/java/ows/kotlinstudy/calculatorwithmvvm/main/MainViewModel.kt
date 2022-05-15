@@ -9,7 +9,7 @@ import ows.kotlinstudy.mvcexample.model.db.entity.ResultEntity
 import java.util.*
 
 class MainViewModel(
-    private val db: ResultDatabase
+    private val db: ResultDatabase?
 ) {
     private val numStack = Stack<Int>()
     private val operationStack = Stack<Char>()
@@ -29,7 +29,9 @@ class MainViewModel(
         get() = _items
 
     init {
-        _items.value = db.resultDao().getResultList()
+        db?.let { db ->
+            _items.value = db.resultDao().getResultList()
+        }
     }
 
     fun clickNumButton(num: Int) {
@@ -149,11 +151,14 @@ class MainViewModel(
         }
         _resultText.value = "${numStack.peek()}"
 
-        db.resultDao().insertResult(
-            ResultEntity(
-                "${curText.value} ${numStack.peek()}"
+        db?.let{ db ->
+            db.resultDao().insertResult(
+                ResultEntity(
+                    "${curText.value} ${numStack.peek()}"
+                )
             )
-        )
+        }
+
     }
 
     fun clickClearButton() {
