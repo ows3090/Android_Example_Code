@@ -1,7 +1,7 @@
 package ows.kotlinstudy.calculatorwithcleanarchitecture.domain.main
 
 import ows.kotlinstudy.calculatorwithcleanarchitecture.data.model.Calculator
-import ows.kotlinstudy.calculatorwithcleanarchitecture.domain.UseCase
+import ows.kotlinstudy.calculatorwithcleanarchitecture.domain.usecase.UseCase
 
 class ClickDivideUseCase(
     private val calculator: Calculator

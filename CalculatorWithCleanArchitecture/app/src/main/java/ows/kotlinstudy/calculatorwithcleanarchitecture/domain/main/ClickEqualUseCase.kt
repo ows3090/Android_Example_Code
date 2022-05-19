@@ -1,13 +1,14 @@
 package ows.kotlinstudy.calculatorwithcleanarchitecture.domain.main
 
 import ows.kotlinstudy.calculatorwithcleanarchitecture.data.model.Calculator
-import ows.kotlinstudy.calculatorwithcleanarchitecture.domain.UseCase
+import ows.kotlinstudy.calculatorwithcleanarchitecture.domain.repository.ResultRepository
+import ows.kotlinstudy.calculatorwithcleanarchitecture.domain.usecase.UseCase
 import ows.kotlinstudy.mvcexample.model.db.dao.ResultDao
 import ows.kotlinstudy.mvcexample.model.db.entity.ResultEntity
 
 class ClickEqualUseCase(
     private val calculator: Calculator,
-    private val resultDao: ResultDao
+    private val resultRepository: ResultRepository
 ) : UseCase {
 
     operator fun invoke(): Pair<String, String> {
@@ -42,12 +43,12 @@ class ClickEqualUseCase(
             }
         }
 
-        resultDao.insertResult(
+        resultRepository.insertResult(
             ResultEntity(
                 "${calculator.curText} ${calculator.numStack.peek()}"
             )
         )
 
-        return "${calculator.curText}" to "${calculator.numStack.peek()}"
+        return calculator.curText to "${calculator.numStack.peek()}"
     }
 }

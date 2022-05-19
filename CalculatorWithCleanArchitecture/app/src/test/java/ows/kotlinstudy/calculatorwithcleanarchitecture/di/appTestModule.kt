@@ -9,16 +9,17 @@ import ows.kotlinstudy.calculatorwithcleanarchitecture.data.repository.ResultRep
 import ows.kotlinstudy.calculatorwithcleanarchitecture.domain.main.*
 import ows.kotlinstudy.calculatorwithcleanarchitecture.domain.repository.ResultRepository
 import ows.kotlinstudy.calculatorwithcleanarchitecture.presentation.main.MainViewModel
+import ows.kotlinstudy.calculatorwithcleanarchitecture.repository.MockRepositoryImpl
 import ows.kotlinstudy.mvcexample.model.db.ResultDatabase
 import java.util.*
 
-val appModule = module {
+val appTestModule = module {
     // DB
     single { ResultDatabase.build(androidContext()) }
     single { get<ResultDatabase>().resultDao() }
 
     // Repository
-    single<ResultRepository> { ResultRepositoryImpl(get()) }
+    single<ResultRepository> { MockRepositoryImpl() }
 
     // Calculator
     single { Calculator(Stack<Int>(), Stack<Char>()) }

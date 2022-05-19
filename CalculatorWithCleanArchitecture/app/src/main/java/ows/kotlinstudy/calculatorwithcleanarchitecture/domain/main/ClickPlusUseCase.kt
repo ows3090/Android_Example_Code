@@ -1,7 +1,7 @@
 package ows.kotlinstudy.calculatorwithcleanarchitecture.domain.main
 
 import ows.kotlinstudy.calculatorwithcleanarchitecture.data.model.Calculator
-import ows.kotlinstudy.calculatorwithcleanarchitecture.domain.UseCase
+import ows.kotlinstudy.calculatorwithcleanarchitecture.domain.usecase.UseCase
 
 class ClickPlusUseCase(
     private val calculator: Calculator
